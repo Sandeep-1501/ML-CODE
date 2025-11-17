@@ -12,6 +12,7 @@ plt.title('Dataset Class Percentage Distribution')
 plt.savefig('dataset_pie_chart.png')
 plt.show()
 
+# === 3. Combined Sample Image Grid ===
 plt.figure(figsize=(10, 6))
 for i, cls in enumerate(classes):
     folder = os.path.join(dataset_path, cls)
@@ -57,8 +58,10 @@ plt.tight_layout()
 plt.savefig('image_size_distribution.png')
 plt.show()
 
+# === 5. Augmentation Count Visualization (Simulated) ===
 original_counts = counts
-augmented_counts = {cls: int(original_counts[cls] * 2.5) for cls in classes}  
+augmented_counts = {cls: int(original_counts[cls] * 2.5) for cls in classes}  # assume augmentation doubles+extra
+
 x = np.arange(len(classes))
 width = 0.35
 
@@ -72,6 +75,7 @@ plt.legend()
 plt.savefig('augmentation_comparison.png')
 plt.show()
 
+# === 6. Training vs Validation Accuracy/Loss (Simulated Example) ===
 epochs = np.arange(1, 11)
 train_acc = np.linspace(0.6, 0.95, 10)
 val_acc = np.linspace(0.55, 0.9, 10)

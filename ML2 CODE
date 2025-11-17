@@ -1,0 +1,44 @@
+import os
+import matplotlib.pyplot as plt
+import random
+from PIL import Image
+
+# Path to your dataset
+dataset_path = r"C:\Users\Win10\OneDrive\Desktop\BML\dataset"
+
+classes = ['flatfoot', 'normal']
+counts = {}
+
+# Count images per class
+for cls in classes:
+    folder = os.path.join(dataset_path, cls)
+    counts[cls] = len(os.listdir(folder))
+
+# Print results
+print("Dataset Summary:")
+for k, v in counts.items():
+    print(f"{k}: {v} images")
+
+# Plot bar graph
+plt.bar(counts.keys(), counts.values(), color=['tomato', 'skyblue'])
+plt.title('Flatfoot Dataset Distribution')
+plt.xlabel('Category')
+plt.ylabel('Number of Images')
+plt.savefig('dataset_distribution.png')
+plt.show()
+
+# Show few random sample images
+for cls in classes:
+    folder = os.path.join(dataset_path, cls)
+    sample_images = random.sample(os.listdir(folder), min(3, len(os.listdir(folder))))
+    plt.figure(figsize=(8, 3))
+    for i, img_name in enumerate(sample_images):
+        img_path = os.path.join(folder, img_name)
+        img = Image.open(img_path)
+        plt.subplot(1, len(sample_images), i + 1)
+        plt.imshow(img)
+        plt.title(cls)
+        plt.axis('off')
+    plt.tight_layout()
+    plt.savefig(f'sample_{cls}.png')
+    plt.show()
